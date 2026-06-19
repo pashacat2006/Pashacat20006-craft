@@ -39,9 +39,17 @@ public class CookingtableMenu extends AbstractContainerMenu {
 
         // Слоты стола — та же сетка, что у инвентаря (5 + col*16, row*20), но 3×3 и выше
         this.blockenty.getCapability(ForgeCapabilities.ITEM_HANDLER).ifPresent(iItemHandler -> {
+            int xOffset = -55;
+            int yOffset = -8;
+
             for (int row = 0; row < 3; ++row) {
                 for (int col = 0; col < 3; ++col) {
-                    this.addSlot(new SlotItemHandler(iItemHandler, row * 3 + col, 5 + col * 22 - 60, 17 + row * 23 - 25));
+                    this.addSlot(new SlotItemHandler(
+                            iItemHandler,
+                            row * 3 + col,
+                            col * 22 + xOffset,
+                            row * 23 + yOffset
+                    ));
                 }
             }
             this.addSlot(new SlotItemHandler(iItemHandler, 9, 58, 80));   // Cora / кора
