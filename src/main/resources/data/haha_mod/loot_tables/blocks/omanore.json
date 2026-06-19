@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 5,
+      "bonus_rolls": 10,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "haha_mod:om",
+          "quality": 95
+        },
+        {
+          "type": "minecraft:item",
+          "name": "haha_mod:omanore",
+          "quality": 20
+        }
+      ]
+    }
+  ],
+  "random_sequence": "30"
+}
