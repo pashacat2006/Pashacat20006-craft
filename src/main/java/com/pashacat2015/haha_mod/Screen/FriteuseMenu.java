@@ -1,7 +1,7 @@
 package com.pashacat2015.haha_mod.Screen;
 
 import com.pashacat2015.haha_mod.init.BlockMod;
-import com.pashacat2015.haha_mod.init.block.entity.CookingTableEntity;
+import com.pashacat2015.haha_mod.init.block.entity.FriteuseEntity;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -15,21 +15,21 @@ import net.minecraftforge.items.SlotItemHandler;
  * Серверное и клиентское меню (контейнер) стола готовки.
  * Связывает слоты игрока со слотами BlockEntity и задаёт их позиции на экране.
  */
-public class CookingtableMenu extends AbstractContainerMenu {
-    public final CookingTableEntity blockenty;
+public class FriteuseMenu extends AbstractContainerMenu {
+    public final FriteuseEntity blockenty;
     private final Level l;
     private final ContainerData dat;
 
     /** Конструктор для клиента — позиция блока приходит из сети */
-    public CookingtableMenu(int ContanirId, Inventory inv, FriendlyByteBuf extradat) {
+    public FriteuseMenu(int ContanirId, Inventory inv, FriendlyByteBuf extradat) {
         this(ContanirId, inv, inv.player.level().getBlockEntity(extradat.readBlockPos()), new SimpleContainerData(2));
     }
 
     /** Конструктор для сервера */
-    public CookingtableMenu(int contanirid, Inventory inv, BlockEntity entity, ContainerData dat1) {
-        super(MenuType.COOKINGTABLE_MENU.get(), contanirid);
-        checkContainerSize(inv, 12);
-        blockenty = ((CookingTableEntity) entity);
+    public FriteuseMenu(int contanirid, Inventory inv, BlockEntity entity, ContainerData dat1) {
+        super(MenuType.FRITEUSE_MENU.get(), contanirid);
+        checkContainerSize(inv, 3);
+        blockenty = ((FriteuseEntity) entity);
         this.l = inv.player.level();
         this.dat = blockenty.data;
 
@@ -38,14 +38,9 @@ public class CookingtableMenu extends AbstractContainerMenu {
 
         // Слоты стола — та же сетка, что у инвентаря (5 + col*16, row*20), но 3×3 и выше
         var handler = blockenty.getItemHandler();
-        for (int row = 0; row < 3; ++row) {
-            for (int col = 0; col < 3; ++col) {
-                this.addSlot(new SlotItemHandler(handler, row * 3 + col, 5 + col * 22 - 60, 17 + row * 23 - 25));
-            }
-        }
-        this.addSlot(new SlotItemHandler(handler, 9, 58, 80));   // Cora / кора
-        this.addSlot(new SlotItemHandler(handler, 10, 18, 80));  // Уголь
-        this.addSlot(new SlotItemHandler(handler, 11, 118, 15)); // Результат
+        this.addSlot(new SlotItemHandler(handler, 0, 67, 27));  // Butter / масло
+        this.addSlot(new SlotItemHandler(handler, 1, 67, 72));  // Food / еда
+        this.addSlot(new SlotItemHandler(handler, 2, 136, 55)); // Результат
         addDataSlots(blockenty.data);
     }
 
@@ -67,7 +62,7 @@ public class CookingtableMenu extends AbstractContainerMenu {
     private void addPlayerInventory(Inventory playerInventory) {
         for (int i = 0; i < 3; ++i) {
             for (int l = 0; l < 9; ++l) {
-                this.addSlot(new Slot(playerInventory, l + i * 9 + 9, 5 + l * 16, 125 + i * 20));
+                this.addSlot(new Slot(playerInventory, l + i * 9 + 9, 12 + l * 18, 114 + i * 18));
             }
         }
     }
@@ -75,7 +70,7 @@ public class CookingtableMenu extends AbstractContainerMenu {
     /** Панель быстрого доступа (хотбар) */
     private void addPlayerHotbar(Inventory playerInventory) {
         for (int i = 0; i < 9; ++i) {
-            this.addSlot(new Slot(playerInventory, i, 8 + i * 18 - 6, 202));
+            this.addSlot(new Slot(playerInventory, i, 9 + i * 18, 177));
         }
     }
 
@@ -87,7 +82,7 @@ public class CookingtableMenu extends AbstractContainerMenu {
     private static final int VANILLA_SLOT_COUNT = HOTBAR_SLOT_COUNT + PLAYER_INVENTORY_SLOT_COUNT;
     private static final int VANILLA_FIRST_SLOT_INDEX = 0;
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
-    private static final int TE_INVENTORY_SLOT_COUNT = 12;
+    private static final int TE_INVENTORY_SLOT_COUNT = 3;
 
     /** Shift+клик: перенос между инвентарём игрока и слотами стола */
     @Override
@@ -124,6 +119,6 @@ public class CookingtableMenu extends AbstractContainerMenu {
     /** Можно ли ещё пользоваться меню (игрок рядом с блоком) */
     @Override
     public boolean stillValid(Player player) {
-        return stillValid(ContainerLevelAccess.create(l, blockenty.getBlockPos()), player, BlockMod.COOKING_TABLE_BLOCK.get());
+        return stillValid(ContainerLevelAccess.create(l, blockenty.getBlockPos()), player, BlockMod.FRITEUSE_BLOCK.get());
     }
 }

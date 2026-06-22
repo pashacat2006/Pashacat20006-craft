@@ -1,8 +1,7 @@
 package com.pashacat2015.haha_mod.init.block.entity;
 
-import com.pashacat2015.haha_mod.Screen.CookingtableMenu;
-import com.pashacat2015.haha_mod.init.itemMain;
-import com.pashacat2015.haha_mod.recipe.CookingtableRecipe;
+import com.pashacat2015.haha_mod.Screen.FriteuseMenu;
+import com.pashacat2015.haha_mod.recipe.FriteuseRecipe;
 import com.pashacat2015.haha_mod.recipe.RecipreMod;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -34,23 +33,14 @@ import java.util.Optional;
  * BlockEntity стола готовки.
  * Хранит 12 слотов, прогресс крафта и синхронизирует данные с GUI.
  */
-public class CookingTableEntity extends BlockEntity implements MenuProvider {
+public class FriteuseEntity extends BlockEntity implements MenuProvider {
     /** Инвентарь стола: 12 слотов */
-    private final ItemStackHandler itemHandrel = new ItemStackHandler(12);
+    private final ItemStackHandler itemHandrel = new ItemStackHandler(3);
 
     // --- Номера слотов в инвентаре ---
     private static final int INPUT_SLOT = 0;       // Основной слот ингредиента (шампур)
-    private static final int INPUT_SLOT1 = 1;      // Слот ингредиента 2
-    private static final int INPUT_SLOT2 = 2;
-    private static final int INPUT_SLOT3 = 3;
-    private static final int INPUT_SLOT4 = 4;
-    private static final int INPUT_SLOT5 = 5;
-    private static final int INPUT_SLOT6 = 6;
-    private static final int INPUT_SLOT7 = 7;
-    private static final int INPUT_SLOT8 = 8;      // Слот ингредиента 9 (сетка 3x3)
-    private static final int INPUT_SLOTCORA = 9;   // Слот Cora / кора
-    private static final int INPUT_SLOTCOOL = 10;  // Слот топлива (уголь)
-    private static final int OUTPUT_SLOT = 11;     // Слот результата
+    private static final int INPUT_SLOT1 = 1;      // Слот ингредиента 2// Слот топлива (уголь)
+    private static final int OUTPUT_SLOT = 2;     // Слот результата
 
     private LazyOptional<IItemHandler> lazyItemHandler = LazyOptional.empty();
 
@@ -61,16 +51,16 @@ public class CookingTableEntity extends BlockEntity implements MenuProvider {
     /** Данные для синхронизации прогресса готовки с клиентом (GUI) */
     public final ContainerData data;
     private int progress = 0;
-    private int maxprogress = 1200;
+    private int maxprogress = 600;
 
-    public CookingTableEntity(BlockPos pos, BlockState state) {
-        super(com.pashacat2015.haha_mod.init.block.entity.BlockEntity.COOKING_BE.get(), pos, state);
+    public FriteuseEntity(BlockPos pos, BlockState state) {
+        super(com.pashacat2015.haha_mod.init.block.entity.BlockEntity.FRITE_BE.get(), pos, state);
         this.data = new ContainerData() {
             @Override
             public int get(int index) {
                 return switch (index) {
-                    case 0 -> CookingTableEntity.this.progress;
-                    case 1 -> CookingTableEntity.this.maxprogress;
+                    case 0 -> FriteuseEntity.this.progress;
+                    case 1 -> FriteuseEntity.this.maxprogress;
                     default -> 0;
                 };
             }
@@ -78,8 +68,8 @@ public class CookingTableEntity extends BlockEntity implements MenuProvider {
             @Override
             public void set(int index, int value) {
                 switch (index) {
-                    case 0 -> CookingTableEntity.this.progress = value;
-                    case 1 -> CookingTableEntity.this.maxprogress = value;
+                    case 0 -> FriteuseEntity.this.progress = value;
+                    case 1 -> FriteuseEntity.this.maxprogress = value;
                 }
             }
 
@@ -122,19 +112,19 @@ public class CookingTableEntity extends BlockEntity implements MenuProvider {
 
     @Override
     public Component getDisplayName() {
-        return Component.translatable("block.haha_mod.cookingtable");
+        return Component.translatable("block.haha_mod.friteuse");
     }
 
     /** Создание серверного меню (контейнера) для игрока */
     @Override
     public @Nullable AbstractContainerMenu createMenu(int containerId, Inventory inventory, Player player) {
-        return new CookingtableMenu(containerId, inventory, this, this.data);
+        return new FriteuseMenu(containerId, inventory, this, this.data);
     }
 
     @Override
     protected void saveAdditional(CompoundTag tag) {
         tag.put("inventory", itemHandrel.serializeNBT());
-        tag.putInt("cookingtable.progress", progress);
+        tag.putInt("friteuse.progress", progress);
         super.saveAdditional(tag);
     }
 
@@ -142,7 +132,7 @@ public class CookingTableEntity extends BlockEntity implements MenuProvider {
     public void load(CompoundTag tag) {
         super.load(tag);
         itemHandrel.deserializeNBT(tag.getCompound("inventory"));
-        progress = tag.getInt("cookingtable.progress");
+        progress = tag.getInt("friteuse.progress");
     }
 
     /** Вызывается каждый тик сервера — логика готовки */
@@ -171,12 +161,12 @@ public class CookingTableEntity extends BlockEntity implements MenuProvider {
 
     /** Завершение крафта: забираем шампур, кладём Cora в выход */
     private void craftItem() {
-        Optional<CookingtableRecipe> recipe = getCurrentRecipe();
+        Optional<FriteuseRecipe> recipe = getCurrentRecipe();
         if (recipe.isEmpty()) {
             return;
         }
         ItemStack result = recipe.get().getResultItem(getLevel().registryAccess());
-        for (int i = 0; i < OUTPUT_SLOT; i++) {
+        for (int i = 0; i < INPUT_SLOT1 + 1; i++) {
             int count = recipe.get().getIngredientCount(i);
             if (count > 0 && !recipe.get().getIngredients().get(i).isEmpty()) {
                 this.itemHandrel.extractItem(i, count, false);
@@ -196,24 +186,24 @@ public class CookingTableEntity extends BlockEntity implements MenuProvider {
 
     /** Проверка рецепта: шампур во входе и место в выходе */
     private boolean hasRecipe() {
-        Optional<CookingtableRecipe> recipe = getCurrentRecipe();
+        Optional<FriteuseRecipe> recipe = getCurrentRecipe();
         if (recipe.isEmpty()) {
             return false;
         }
         ItemStack result = recipe.get().getResultItem(getLevel().registryAccess());
-        return  canInsertOutputSlot(result.getCount()) && canInsertItemOutputSlot(result.getItem());
+        return canInsertOutputSlot(result.getCount()) && canInsertItemOutputSlot(result.getItem());
     }
 
-    private java.util.Optional<CookingtableRecipe> getCurrentRecipe() {
+    private Optional<FriteuseRecipe> getCurrentRecipe() {
         if (level == null) {
-            return java.util.Optional.empty();
+            return Optional.empty();
         }
         SimpleContainer inventory = new SimpleContainer(this.itemHandrel.getSlots());
         for (int i = 0; i < itemHandrel.getSlots(); i++) {
             inventory.setItem(i, this.itemHandrel.getStackInSlot(i));
         }
         return level.getRecipeManager()
-                .getRecipesFor(RecipreMod.COOKINGTABLE_TYPE.get(), inventory, level)
+                .getRecipesFor(RecipreMod.FRITEUSE_TYPE.get(), inventory, level)
                 .stream()
                 .findFirst();
     }

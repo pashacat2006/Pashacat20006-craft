@@ -20,6 +20,11 @@ public class itemMain {
     public static final RegistryObject<Item> CORA = RegisterObjectCreate("cora", 95);
     public static final RegistryObject<Item> SKEWER = RegisterObjectCreate("skewer", 10);
     public static final RegistryObject<Item> BARBEQUI = RegisterObjectCreateFood("barbequi", 64, FoodMod.BARBEQUI);
+    public static final RegistryObject<Item> PIZZA = RegisterObjectCreateFood("pizza", 64, FoodMod.PIZZA);
+    public static final RegistryObject<Item> SANDWITH = RegisterObjectCreateFood("sandwith", 64, FoodMod.SANDWITH);
+    public static final RegistryObject<Item> CHEESE = RegisterObjectCreateFood("cheese", 64, FoodMod.CHEESE);
+    public static final RegistryObject<Item> FRENCHFRICE = RegisterObjectCreateFood("frenchfrice", 64, FoodMod.FRENCHFRICE);
+    public static final RegistryObject<Item> BUTTER = RegisterObjectCreateFood("butter", 64, FoodMod.BUTTER);
 
     /** Обычный предмет без свойств еды */
     public static RegistryObject<Item> RegisterObjectCreate(String id, int stack) {
