@@ -1,0 +1,29 @@
+{
+  "type": "haha_mod:cookingtable",
+  "ingredients": [
+    {
+      "slot": 1,
+      "item": "minecraft:beef"
+    },
+    {
+      "slot": 7,
+      "item": "minecraft:beef"
+    },
+    {
+      "slot": 4,
+      "item": "haha_mod:skewer"
+    },
+    {
+      "slot": 10,
+      "item": "minecraft:coal"
+    },
+    {
+      "slot": 9,
+      "item": "haha_mod:cora"
+    }
+  ],
+  "output": {
+    "count": 1,
+    "item": "haha_mod:barbequi"
+  }
+}

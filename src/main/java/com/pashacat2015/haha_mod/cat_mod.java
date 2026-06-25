@@ -2,11 +2,13 @@ package com.pashacat2015.haha_mod;
 
 import com.mojang.logging.LogUtils;
 import com.pashacat2015.haha_mod.Screen.CookingtableScreen;
+import com.pashacat2015.haha_mod.Screen.FriteuseScreen;
 import com.pashacat2015.haha_mod.Screen.MenuType;
 import com.pashacat2015.haha_mod.init.BlockMod;
 import com.pashacat2015.haha_mod.init.CreativeTabs;
 import com.pashacat2015.haha_mod.init.block.entity.BlockEntity;
 import com.pashacat2015.haha_mod.init.itemMain;
+import com.pashacat2015.haha_mod.recipe.RecipreMod;
 import net.minecraft.client.gui.screens.MenuScreens;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.common.MinecraftForge;
@@ -43,6 +45,7 @@ public class cat_mod {
         BlockMod.registerBlocks(modEventBus);
         BlockEntity.register(modEventBus);
         MenuType.register(modEventBus);
+        RecipreMod.register(modEventBus);
 
         // Шина событий Forge (игровые события)
         MinecraftForge.EVENT_BUS.register(this);
@@ -55,6 +58,7 @@ public class cat_mod {
     /** Клиентская настройка: привязка GUI-экрана к типу меню */
     private void clientSetup(final FMLClientSetupEvent event) {
         event.enqueueWork(() -> MenuScreens.register(MenuType.COOKINGTABLE_MENU.get(), CookingtableScreen::new));
+        event.enqueueWork(() -> MenuScreens.register(MenuType.FRITEUSE_MENU.get(), FriteuseScreen::new));
     }
 
     /** Добавление предметов и блоков мода во ванильные вкладки креатива */
@@ -69,9 +73,15 @@ public class cat_mod {
             event.accept(itemMain.XYGUREDNHEART.get());
             event.accept(itemMain.OM.get());
             event.accept(itemMain.BARBEQUI.get());
+            event.accept(itemMain.PIZZA.get());
+            event.accept(itemMain.SANDWITH.get());
+            event.accept(itemMain.CHEESE.get());
+            event.accept(itemMain.FRENCHFRICE.get());
+            event.accept(itemMain.BUTTER.get());
         }
         if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
             event.accept(BlockMod.COOKING_TABLE_BLOCK.get());
+            event.accept(BlockMod.FRITEUSE_BLOCK.get());
         }
         if (event.getTabKey() == CreativeModeTabs.NATURAL_BLOCKS) {
             event.accept(BlockMod.OMAN_BLOCK_ORE.get());

@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "###",
+    "#!#",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:netherite_block"
+    },
+    "!": {
+      "item": "haha_mod:cookingtable"
+    }
+  },
+  "result": {
+    "item": "haha_mod:friteuse"
+  }
+}

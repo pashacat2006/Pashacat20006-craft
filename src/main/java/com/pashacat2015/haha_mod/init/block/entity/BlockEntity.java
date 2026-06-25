@@ -20,6 +20,11 @@ public class BlockEntity {
             BLOCK_ENTITYS.register("cookingtable_be",
                     () -> BlockEntityType.Builder.of(CookingTableEntity::new, BlockMod.COOKING_TABLE_BLOCK.get()).build(null));
 
+
+    public static final RegistryObject<BlockEntityType<FriteuseEntity>> FRITE_BE =
+            BLOCK_ENTITYS.register("friteuse_be",
+                    () -> BlockEntityType.Builder.of(FriteuseEntity::new, BlockMod.FRITEUSE_BLOCK.get()).build(null));
+
     public static void register(IEventBus event) {
         BLOCK_ENTITYS.register(event);
     }

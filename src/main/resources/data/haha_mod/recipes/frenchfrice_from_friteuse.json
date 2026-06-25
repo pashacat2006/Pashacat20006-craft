@@ -1,0 +1,17 @@
+{
+  "type": "haha_mod:friteuse",
+  "ingredients": [
+    {
+      "slot": 0,
+      "item": "haha_mod:butter"
+    },
+    {
+      "slot": 1,
+      "item": "minecraft:potato"
+    }
+  ],
+  "output": {
+    "count": 1,
+    "item": "haha_mod:frenchfrice"
+  }
+}

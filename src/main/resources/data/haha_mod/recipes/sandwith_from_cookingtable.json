@@ -1,0 +1,29 @@
+{
+  "type": "haha_mod:cookingtable",
+  "ingredients": [
+    {
+      "slot": 1,
+      "item": "minecraft:bread"
+    },
+    {
+      "slot": 7,
+      "item": "minecraft:bread"
+    },
+    {
+      "slot": 4,
+      "item": "haha_mod:cheese"
+    },
+    {
+      "slot": 10,
+      "item": "minecraft:coal"
+    },
+    {
+      "slot": 9,
+      "item": "haha_mod:cora"
+    }
+  ],
+  "output": {
+    "count": 1,
+    "item": "haha_mod:sandwith"
+  }
+}

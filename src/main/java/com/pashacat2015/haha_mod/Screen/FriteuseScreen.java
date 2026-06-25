@@ -13,26 +13,20 @@ import net.minecraft.world.entity.player.Inventory;
  * Клиентский экран GUI стола готовки.
  * Отображает текстуру фона, слоты и стрелку прогресса.
  */
-public class CookingtableScreen extends AbstractContainerScreen<CookingtableMenu> {
-    public CookingtableScreen(CookingtableMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
+public class FriteuseScreen extends AbstractContainerScreen<FriteuseMenu> {
+    public FriteuseScreen(FriteuseMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
     }
 
-    private static final ResourceLocation TEXTURE = new ResourceLocation(cat_mod.MODID, "textures/gui/cookingtable.png");
-    /** Спрайт стрелки прогресса из ванильной печи */
+    private static final ResourceLocation TEXTURE = new ResourceLocation(cat_mod.MODID, "textures/gui/friteuse.png");
     private static final ResourceLocation FURNACE_TEXTURE = new ResourceLocation("minecraft", "textures/gui/container/furnace.png");
-
-    /** Позиция стрелки прогресса на экране (от leftPos/topPos) */
-    private static final int ARROW_X = 14;
-    private static final int ARROW_Y = 12;
-
 
     @Override
     protected void init() {
         super.init();
         // Скрываем стандартные подписи — они уже нарисованы на текстуре
-        this.inventoryLabelY = 100000;
-        this.titleLabelY = 100000;
+        this.inventoryLabelY = 10000;
+        this.titleLabelY = 10000;
     }
 
     /** Отрисовка фона GUI и стрелки прогресса */
@@ -41,20 +35,20 @@ public class CookingtableScreen extends AbstractContainerScreen<CookingtableMenu
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.setShaderTexture(0, TEXTURE);
-        int x = (width - imageWidth) / 2;
-        int y = (height - imageHeight) / 2;
+        int x = (width - imageWidth  * 2);
+        int y = (height - imageHeight - 65);
 
-        guiGraphics.blit(TEXTURE, x - 70, y - 40, 0, 0, imageWidth + imageWidth / 2 - 35, imageHeight + imageHeight / 2);
+        guiGraphics.blit(TEXTURE, x, y, 0, 0, imageWidth + 50, imageHeight + 50);
 
         renderProgressArrow(guiGraphics, x, y);
     }
 
-    /** Анимированная стрелка прогресса готовки (как в печи) */
+    /** Анимированная стрелка прогресса (как в печи) */
     private void renderProgressArrow(GuiGraphics guiGraphics, int x, int y) {
         if (menu.isCrafting()) {
             int arrowWidth = menu.getScaledProgress();
             if (arrowWidth > 0) {
-                guiGraphics.blit(FURNACE_TEXTURE, x + ARROW_X, y + ARROW_Y, 176, 14, arrowWidth, 16);
+                guiGraphics.blit(FURNACE_TEXTURE, x + 104, y + 62, 176, 14, arrowWidth, 16);
             }
         }
     }
