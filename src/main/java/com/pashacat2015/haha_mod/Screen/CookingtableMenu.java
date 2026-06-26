@@ -1,4 +1,4 @@
-﻿package com.pashacat2015.haha_mod.Screen;
+package com.pashacat2015.haha_mod.Screen;
 
 import com.pashacat2015.haha_mod.init.BlockMod;
 import com.pashacat2015.haha_mod.init.block.entity.CookingTableEntity;
