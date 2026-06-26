@@ -16,6 +16,9 @@ import net.minecraft.world.entity.player.Inventory;
 public class FriteuseScreen extends AbstractContainerScreen<FriteuseMenu> {
     public FriteuseScreen(FriteuseMenu pMenu, Inventory pPlayerInventory, Component pTitle) {
         super(pMenu, pPlayerInventory, pTitle);
+
+        //this.imageWidth = 1000;
+        //this.imageHeight = 1000;
     }
 
     private static final ResourceLocation TEXTURE = new ResourceLocation(cat_mod.MODID, "textures/gui/friteuse.png");
@@ -35,10 +38,10 @@ public class FriteuseScreen extends AbstractContainerScreen<FriteuseMenu> {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.setShaderTexture(0, TEXTURE);
-        int x = (width - imageWidth  * 2);
-        int y = (height - imageHeight - 65);
+        int x = (width - imageWidth) / 2;
+        int y = (height - imageHeight) / 2;
 
-        guiGraphics.blit(TEXTURE, x, y, 0, 0, imageWidth + 50, imageHeight + 50);
+        guiGraphics.blit(TEXTURE, leftPos-25, topPos-25, 0, 0, imageWidth+50, imageHeight+50);
 
         renderProgressArrow(guiGraphics, x, y);
     }
@@ -48,7 +51,7 @@ public class FriteuseScreen extends AbstractContainerScreen<FriteuseMenu> {
         if (menu.isCrafting()) {
             int arrowWidth = menu.getScaledProgress();
             if (arrowWidth > 0) {
-                guiGraphics.blit(FURNACE_TEXTURE, x + 104, y + 62, 176, 14, arrowWidth, 16);
+                guiGraphics.blit(FURNACE_TEXTURE, x + 79, y + 33, 176, 14, arrowWidth, 16);
             }
         }
     }

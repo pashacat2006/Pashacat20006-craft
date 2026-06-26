@@ -38,9 +38,9 @@ public class FriteuseMenu extends AbstractContainerMenu {
 
         // Слоты стола — та же сетка, что у инвентаря (5 + col*16, row*20), но 3×3 и выше
         var handler = blockenty.getItemHandler();
-        this.addSlot(new SlotItemHandler(handler, 0, 67, 27));  // Butter / масло
-        this.addSlot(new SlotItemHandler(handler, 1, 67, 72));  // Food / еда
-        this.addSlot(new SlotItemHandler(handler, 2, 136, 55)); // Результат
+        this.addSlot(new SlotItemHandler(handler, 0, 51, 12));  // Butter / масло
+        this.addSlot(new SlotItemHandler(handler, 1, 51, 55));  // Food / еда
+        this.addSlot(new SlotItemHandler(handler, 2, 123, 35)); // Результат
         addDataSlots(blockenty.data);
     }
 
