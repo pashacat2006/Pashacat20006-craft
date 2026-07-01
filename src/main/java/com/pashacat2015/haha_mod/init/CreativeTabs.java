@@ -19,7 +19,7 @@ public class CreativeTabs {
     public static final RegistryObject<CreativeModeTab> TAB = CREATEVE_TABS_MORE.register("pashacat_craft", () -> CreativeModeTab
             .builder()
             .icon(() -> itemMain.XYGUGREENHEART.get().getDefaultInstance())
-            .title(Component.nullToEmpty("Pashacat craft"))
+            .title(Component.translatable("itemGroup.haha_mod.pashacat_craft"))
             .displayItems((parameters, output) -> {
                 output.accept(itemMain.XYGUGREENHEART.get());
                 output.accept(itemMain.XYGUREDNHEART.get());
@@ -35,6 +35,20 @@ public class CreativeTabs {
                 output.accept(itemMain.FRENCHFRICE.get());
                 output.accept(BlockMod.FRITEUSE_BLOCK.get());
                 output.accept(itemMain.BUTTER.get());
+                output.accept(itemMain.BURGER.get());
+                output.accept(itemMain.TACO.get());
+                output.accept(itemMain.EGG.get());
+                output.accept(itemMain.LEMONJUICE.get());
+                output.accept(itemMain.SHUSHILOSOS.get());
+                output.accept(itemMain.CHOCOLATEMILK.get());
+                output.accept(itemMain.CHOCOLATE.get());
+                output.accept(itemMain.CUBESUGAR.get());
+                output.accept(itemMain.CULITH.get());
+                output.accept(itemMain.STRABERRYJUICE.get());
+                output.accept(itemMain.BUBLETEA.get());
+                output.accept(itemMain.PIZZACOUNT.get());
+                output.accept(itemMain.COOKINGBOOK.get());
+                output.accept(BlockMod.KNIFETABLE_BLOCK.get());
             }).build()
     );
 
@@ -43,10 +57,11 @@ public class CreativeTabs {
     public static final RegistryObject<CreativeModeTab> TAB_FUNCTIONAL_BLOCK = CREATEVE_TABS_MORE.register("pashacat_craft_functional_block", () -> CreativeModeTab
             .builder()
             .icon(() -> itemMain.SKEWER.get().getDefaultInstance())
-            .title(Component.nullToEmpty("Pashacat craft functional block"))
+            .title(Component.translatable("itemGroup.haha_mod.pashacat_craft_functional_block"))
             .displayItems((parameters, output) -> {
                 output.accept(BlockMod.COOKING_TABLE_BLOCK.get());
                 output.accept(BlockMod.FRITEUSE_BLOCK.get());
+                output.accept(BlockMod.KNIFETABLE_BLOCK.get());
             }).build()
     );
 
@@ -54,7 +69,7 @@ public class CreativeTabs {
     public static final RegistryObject<CreativeModeTab> TAB_FOOD = CREATEVE_TABS_MORE.register("pashacat_craft_food", () -> CreativeModeTab
             .builder()
             .icon(() -> itemMain.SANDWITH.get().getDefaultInstance())
-            .title(Component.nullToEmpty("Pashacat craft food"))
+            .title(Component.translatable("itemGroup.haha_mod.pashacat_craft_food"))
             .displayItems((parameters, output) -> {
                 output.accept(itemMain.XYGUREDNHEART.get());
                 output.accept(itemMain.OM.get());
@@ -64,6 +79,19 @@ public class CreativeTabs {
                 output.accept(itemMain.CHEESE.get());
                 output.accept(itemMain.FRENCHFRICE.get());
                 output.accept(itemMain.BUTTER.get());
+                output.accept(itemMain.BURGER.get());
+                output.accept(itemMain.TACO.get());
+                output.accept(itemMain.EGG.get());
+                output.accept(itemMain.LEMONJUICE.get());
+                output.accept(itemMain.SHUSHILOSOS.get());
+                output.accept(itemMain.CHOCOLATEMILK.get());
+                output.accept(itemMain.CHOCOLATE.get());
+                output.accept(itemMain.CUBESUGAR.get());
+                output.accept(itemMain.CULITH.get());
+                output.accept(itemMain.STRABERRYJUICE.get());
+                output.accept(itemMain.BUBLETEA.get());
+                output.accept(itemMain.PIZZACOUNT.get());
+                output.accept(itemMain.COOKINGBOOK.get());
             }).build()
     );
 

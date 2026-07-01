@@ -1,0 +1,17 @@
+{
+  "type": "haha_mod:knifetable",
+  "ingredients": [
+    {
+      "slot": 0,
+      "item": "haha_mod:pizza"
+    },
+    {
+      "slot": 1,
+      "item": "minecraft:iron_ingot"
+    }
+  ],
+  "output": {
+    "count": 9,
+    "item": "haha_mod:pizzacount"
+  }
+}

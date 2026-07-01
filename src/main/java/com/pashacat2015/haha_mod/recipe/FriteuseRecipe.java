@@ -41,9 +41,6 @@ public class FriteuseRecipe implements Recipe<SimpleContainer> {
 
     @Override
     public boolean matches(SimpleContainer container, Level level) {
-        if (level.isClientSide()) {
-            return false;
-        }
         for (int i = 0; i < INPUT_SLOTS; i++) {
             Ingredient ingredient = inpuItem.get(i);
             if (ingredient.isEmpty()) {
@@ -82,7 +79,7 @@ public class FriteuseRecipe implements Recipe<SimpleContainer> {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return Serializer.INSTATE;
+        return RecipreMod.FRITEUSE_SERIALEZATOR.get();
     }
 
     @Override
@@ -112,7 +109,7 @@ public class FriteuseRecipe implements Recipe<SimpleContainer> {
                 if (slot < 0 || slot >= INPUT_SLOTS) {
                     continue;
                 }
-                inputs.set(slot, Ingredient.fromJson(entry));
+                inputs.set(slot, parseIngredient(entry));
                 counts.set(slot, GsonHelper.getAsInt(entry, "count", 1));
             }
             return new FriteuseRecipe(inputs, counts, output, resourceLocation);
@@ -137,6 +134,13 @@ public class FriteuseRecipe implements Recipe<SimpleContainer> {
                 friendlyByteBuf.writeVarInt(cookingtableRecipe.ingredientCounts.get(i));
             }
             friendlyByteBuf.writeItem(cookingtableRecipe.getResultItem(null));
+        }
+
+        private static Ingredient parseIngredient(JsonObject entry) {
+            JsonObject ingredientJson = entry.deepCopy();
+            ingredientJson.remove("slot");
+            ingredientJson.remove("count");
+            return Ingredient.fromJson(ingredientJson);
         }
     }
 }

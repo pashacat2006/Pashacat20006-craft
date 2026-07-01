@@ -25,14 +25,30 @@ public class FoodMod {
             .effect(() -> new MobEffectInstance(MobEffects.HEALTH_BOOST, 1200), 0.5f)
             .build();
 
+    public static final FoodProperties PIZZACOUNT = new FoodProperties.Builder()
+            .nutrition(1).fast().saturationMod(0.8f)
+            .effect(() -> new MobEffectInstance(MobEffects.HEALTH_BOOST, 1200), 0.5f)
+            .build();
+
 
     public static final FoodProperties SANDWITH = new FoodProperties.Builder()
             .nutrition(1).fast().saturationMod(0.8f)
             .effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 1200), 0.5f)
             .build();
 
+    public static final FoodProperties BURGER = new FoodProperties.Builder()
+            .nutrition(1).fast().saturationMod(0.8f)
+            .effect(() -> new MobEffectInstance(MobEffects.LUCK, 1200), 0.5f)
+            .build();
+
 
     public static final FoodProperties CHEESE = new FoodProperties.Builder()
+            .nutrition(1).fast().saturationMod(0.8f)
+            .effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 1200), 0.5f)
+            .build();
+
+
+    public static final FoodProperties TACO = new FoodProperties.Builder()
             .nutrition(1).fast().saturationMod(0.8f)
             .effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 1200), 0.5f)
             .build();
@@ -47,6 +63,57 @@ public class FoodMod {
     public static final FoodProperties BUTTER= new FoodProperties.Builder()
             .nutrition(1).fast().saturationMod(0.8f)
             .build();
+
+    public static final FoodProperties EGG= new FoodProperties.Builder()
+            .nutrition(1).fast().saturationMod(0.8f)
+            .build();
+
+    public static final FoodProperties BUBLETEA= new FoodProperties.Builder()
+            .nutrition(1).fast().saturationMod(0.8f)
+            .effect(() -> new MobEffectInstance(MobEffects.JUMP, 1200), 0.5f)
+            .build();
+
+
+    public static final FoodProperties CHOCOLATE= new FoodProperties.Builder()
+            .nutrition(1).fast().saturationMod(0.8f)
+            .effect(() -> new MobEffectInstance(MobEffects.JUMP, 1200), 0.5f)
+            .build();
+
+    public static final FoodProperties CHOCOLATEMILK= new FoodProperties.Builder()
+            .nutrition(1).fast().saturationMod(0.8f)
+            .effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 1200), 0.5f)
+            .build();
+
+    public static final FoodProperties CUBESUGAR= new FoodProperties.Builder()
+            .nutrition(1).fast().saturationMod(0.8f)
+            .effect(() -> new MobEffectInstance(MobEffects.HEALTH_BOOST, 700), 0.5f)
+            .effect(() -> new MobEffectInstance(MobEffects.DAMAGE_BOOST, 1200), 0.5f)
+            .build();
+
+    public static final FoodProperties CULITH= new FoodProperties.Builder()
+            .nutrition(1).fast().saturationMod(0.8f)
+            .effect(() -> new MobEffectInstance(MobEffects.HEALTH_BOOST, 1200), 0.5f)
+            .build();
+
+    public static final FoodProperties LEMONJUICE= new FoodProperties.Builder()
+            .nutrition(1).fast().saturationMod(0.8f)
+            .effect(() -> new MobEffectInstance(MobEffects.JUMP, 1200), 0.5f)
+            .build();
+
+
+    public static final FoodProperties STRABERRYJUICE= new FoodProperties.Builder()
+            .nutrition(1).fast().saturationMod(0.8f)
+            .effect(() -> new MobEffectInstance(MobEffects.JUMP, 1200), 0.5f)
+            .build();
+
+    public static final FoodProperties SHUSHILOSOS= new FoodProperties.Builder()
+            .nutrition(1).fast().saturationMod(0.8f)
+            .effect(() -> new MobEffectInstance(MobEffects.HEALTH_BOOST, 1200), 0.5f)
+            .build();
+
+
+
+
 
 
 

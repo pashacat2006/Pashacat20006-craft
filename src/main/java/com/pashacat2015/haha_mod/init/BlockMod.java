@@ -3,6 +3,7 @@ package com.pashacat2015.haha_mod.init;
 import com.pashacat2015.haha_mod.cat_mod;
 import com.pashacat2015.haha_mod.init.block.custom.CookingTable;
 import com.pashacat2015.haha_mod.init.block.custom.Friteuse;
+import com.pashacat2015.haha_mod.init.block.custom.Knifetable;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -39,6 +40,8 @@ public class BlockMod {
 
     public static final RegistryObject<Block> FRITEUSE_BLOCK = registryObject("friteuse",
             () -> new Friteuse(BlockBehaviour.Properties.copy(Blocks.IRON_BLOCK).noOcclusion()));
+    public static final RegistryObject<Block> KNIFETABLE_BLOCK = registryObject("knifetable",
+            () -> new Knifetable(BlockBehaviour.Properties.copy(Blocks.STONE).noOcclusion()));
 
     public static void registerBlocks(IEventBus bus) {
         BLOCKS.register(bus);

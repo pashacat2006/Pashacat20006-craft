@@ -24,6 +24,13 @@ public class MenuType {
     public static final RegistryObject<net.minecraft.world.inventory.MenuType<FriteuseMenu>> FRITEUSE_MENU =
             registerMenuType("friteuse_menu", FriteuseMenu::new);
 
+    public static final RegistryObject<net.minecraft.world.inventory.MenuType<KnifetableMenu>> KNIFETABLE_MENU =
+            registerMenuType("knifetable_menu", KnifetableMenu::new);
+
+    /** Меню книги готовки */
+    public static final RegistryObject<net.minecraft.world.inventory.MenuType<CookingBookMenu>> COOKINGBOOK_MENU =
+            registerMenuType("cookingbook_menu", (windowId, inv, buf) -> new CookingBookMenu(windowId, inv, buf));
+
     private static <T extends AbstractContainerMenu> RegistryObject<net.minecraft.world.inventory.MenuType<T>> registerMenuType(String name, IContainerFactory<T> factory) {
         return MENUS.register(name, () -> IForgeMenuType.create(factory));
     }

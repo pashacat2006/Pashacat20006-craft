@@ -26,6 +26,12 @@ public class RecipreMod {
     public static final RegistryObject<RecipeType<FriteuseRecipe>> FRITEUSE_TYPE =
             RECIPE_TYPES.register("friteuse", () -> FriteuseRecipe.Type.INSTANCE);
 
+
+    public static final RegistryObject<RecipeSerializer<KnifetableRecipe>> KNIFETABLE_SERIALEZATOR =
+            SERIALIZERS.register("knifetable", () -> KnifetableRecipe.Serializer.INSTATE);
+    public static final RegistryObject<RecipeType<KnifetableRecipe>> KNIFETABLE_TYPE =
+            RECIPE_TYPES.register("knifetable", () -> KnifetableRecipe.Type.INSTANCE);
+
     public static void register(IEventBus event) {
         SERIALIZERS.register(event);
         RECIPE_TYPES.register(event);

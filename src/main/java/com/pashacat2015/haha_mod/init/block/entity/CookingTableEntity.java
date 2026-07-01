@@ -2,12 +2,15 @@ package com.pashacat2015.haha_mod.init.block.entity;
 
 import com.pashacat2015.haha_mod.Screen.CookingtableMenu;
 import com.pashacat2015.haha_mod.init.itemMain;
+import com.pashacat2015.haha_mod.quest.RecipeUnlockRegistry;
 import com.pashacat2015.haha_mod.recipe.CookingtableRecipe;
 import com.pashacat2015.haha_mod.recipe.RecipreMod;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
@@ -29,6 +32,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
+import java.util.UUID;
 
 /**
  * BlockEntity стола готовки.
@@ -62,6 +66,8 @@ public class CookingTableEntity extends BlockEntity implements MenuProvider {
     public final ContainerData data;
     private int progress = 0;
     private int maxprogress = 1200;
+    @Nullable
+    private UUID lastPlayerUuid = null;
 
     public CookingTableEntity(BlockPos pos, BlockState state) {
         super(com.pashacat2015.haha_mod.init.block.entity.BlockEntity.COOKING_BE.get(), pos, state);
@@ -126,8 +132,14 @@ public class CookingTableEntity extends BlockEntity implements MenuProvider {
     }
 
     /** Создание серверного меню (контейнера) для игрока */
+    public void setLastPlayer(Player player) {
+        this.lastPlayerUuid = player.getUUID();
+        setChanged();
+    }
+
     @Override
     public @Nullable AbstractContainerMenu createMenu(int containerId, Inventory inventory, Player player) {
+        setLastPlayer(player);
         return new CookingtableMenu(containerId, inventory, this, this.data);
     }
 
@@ -135,6 +147,9 @@ public class CookingTableEntity extends BlockEntity implements MenuProvider {
     protected void saveAdditional(CompoundTag tag) {
         tag.put("inventory", itemHandrel.serializeNBT());
         tag.putInt("cookingtable.progress", progress);
+        if (lastPlayerUuid != null) {
+            tag.putUUID("cookingtable.last_player", lastPlayerUuid);
+        }
         super.saveAdditional(tag);
     }
 
@@ -143,6 +158,9 @@ public class CookingTableEntity extends BlockEntity implements MenuProvider {
         super.load(tag);
         itemHandrel.deserializeNBT(tag.getCompound("inventory"));
         progress = tag.getInt("cookingtable.progress");
+        if (tag.hasUUID("cookingtable.last_player")) {
+            lastPlayerUuid = tag.getUUID("cookingtable.last_player");
+        }
     }
 
     /** Вызывается каждый тик сервера — логика готовки */
@@ -215,7 +233,17 @@ public class CookingTableEntity extends BlockEntity implements MenuProvider {
         return level.getRecipeManager()
                 .getRecipesFor(RecipreMod.COOKINGTABLE_TYPE.get(), inventory, level)
                 .stream()
+                .filter(recipe -> RecipeUnlockRegistry.canUseRecipe(getLastServerPlayer(), recipe.getId()))
                 .findFirst();
+    }
+
+    @Nullable
+    private ServerPlayer getLastServerPlayer() {
+        if (level == null || lastPlayerUuid == null || !(level instanceof ServerLevel serverLevel)) {
+            return null;
+        }
+        Player player = serverLevel.getServer().getPlayerList().getPlayer(lastPlayerUuid);
+        return player instanceof ServerPlayer serverPlayer ? serverPlayer : null;
     }
 
     private boolean canInsertItemOutputSlot(Item item) {

@@ -4,7 +4,7 @@
 	"texture_size": [64, 64],
 	"textures": {
 		"1": "haha_mod:block/cookingtable",
-		"particle": "cokingtable"
+		"particle": "haha_mod:block/cookingtable"
 	},
 	"elements": [
 		{

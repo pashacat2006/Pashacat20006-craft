@@ -1,6 +1,7 @@
 package com.pashacat2015.haha_mod.init;
 
 import com.pashacat2015.haha_mod.cat_mod;
+import com.pashacat2015.haha_mod.item.CookingBookItem;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -25,6 +26,20 @@ public class itemMain {
     public static final RegistryObject<Item> CHEESE = RegisterObjectCreateFood("cheese", 64, FoodMod.CHEESE);
     public static final RegistryObject<Item> FRENCHFRICE = RegisterObjectCreateFood("frenchfrice", 64, FoodMod.FRENCHFRICE);
     public static final RegistryObject<Item> BUTTER = RegisterObjectCreateFood("butter", 64, FoodMod.BUTTER);
+    public static final RegistryObject<Item> BURGER = RegisterObjectCreateFood("burger", 64, FoodMod.BURGER);
+    public static final RegistryObject<Item> TACO = RegisterObjectCreateFood("taco", 64, FoodMod.TACO);
+    public static final RegistryObject<Item> EGG = RegisterObjectCreateFood("egg", 64, FoodMod.EGG);
+    public static final RegistryObject<Item> BUBLETEA = RegisterObjectCreateFood("bubletea", 64, FoodMod.BUBLETEA);
+    public static final RegistryObject<Item> CHOCOLATE = RegisterObjectCreateFood("chocolate", 64, FoodMod.CHOCOLATE);
+    public static final RegistryObject<Item> CHOCOLATEMILK = RegisterObjectCreateFood("chocolatemilk", 64, FoodMod.CHOCOLATEMILK);
+    public static final RegistryObject<Item> CUBESUGAR = RegisterObjectCreateFood("cubesugar", 64, FoodMod.CUBESUGAR);
+    public static final RegistryObject<Item> CULITH = RegisterObjectCreateFood("culith", 64, FoodMod.CULITH);
+    public static final RegistryObject<Item> LEMONJUICE = RegisterObjectCreateFood("lemonjuice", 64, FoodMod.LEMONJUICE);
+    public static final RegistryObject<Item> PIZZACOUNT = RegisterObjectCreateFood("pizzacount", 64, FoodMod.PIZZACOUNT);
+    public static final RegistryObject<Item> STRABERRYJUICE = RegisterObjectCreateFood("straberryjuice", 64, FoodMod.STRABERRYJUICE);
+    public static final RegistryObject<Item> SHUSHILOSOS = RegisterObjectCreateFood("shushilosos", 64, FoodMod.SHUSHILOSOS);
+    public static final RegistryObject<Item> COOKINGBOOK = ITEMS.register("cookingbook",
+            () -> new CookingBookItem(new Item.Properties().stacksTo(1)));
 
     /** Обычный предмет без свойств еды */
     public static RegistryObject<Item> RegisterObjectCreate(String id, int stack) {

@@ -1,9 +1,12 @@
 package com.pashacat2015.haha_mod;
 
 import com.mojang.logging.LogUtils;
+import com.pashacat2015.haha_mod.Screen.CookingBookScreen;
 import com.pashacat2015.haha_mod.Screen.CookingtableScreen;
 import com.pashacat2015.haha_mod.Screen.FriteuseScreen;
+import com.pashacat2015.haha_mod.Screen.KnifetableScreen;
 import com.pashacat2015.haha_mod.Screen.MenuType;
+import com.pashacat2015.haha_mod.network.PacketHandler;
 import com.pashacat2015.haha_mod.init.BlockMod;
 import com.pashacat2015.haha_mod.init.CreativeTabs;
 import com.pashacat2015.haha_mod.init.block.entity.BlockEntity;
@@ -53,12 +56,15 @@ public class cat_mod {
 
     /** Общая настройка после загрузки всех регистров (сервер и клиент) */
     private void setup(final FMLCommonSetupEvent event) {
+        event.enqueueWork(PacketHandler::register);
     }
 
     /** Клиентская настройка: привязка GUI-экрана к типу меню */
     private void clientSetup(final FMLClientSetupEvent event) {
         event.enqueueWork(() -> MenuScreens.register(MenuType.COOKINGTABLE_MENU.get(), CookingtableScreen::new));
         event.enqueueWork(() -> MenuScreens.register(MenuType.FRITEUSE_MENU.get(), FriteuseScreen::new));
+        event.enqueueWork(() -> MenuScreens.register(MenuType.COOKINGBOOK_MENU.get(), CookingBookScreen::new));
+        event.enqueueWork(() -> MenuScreens.register(MenuType.KNIFETABLE_MENU.get(), KnifetableScreen::new));
     }
 
     /** Добавление предметов и блоков мода во ванильные вкладки креатива */
@@ -78,10 +84,24 @@ public class cat_mod {
             event.accept(itemMain.CHEESE.get());
             event.accept(itemMain.FRENCHFRICE.get());
             event.accept(itemMain.BUTTER.get());
+            event.accept(itemMain.BURGER.get());
+            event.accept(itemMain.TACO.get());
+            event.accept(itemMain.EGG.get());
+            event.accept(itemMain.LEMONJUICE.get());
+            event.accept(itemMain.SHUSHILOSOS.get());
+            event.accept(itemMain.CHOCOLATEMILK.get());
+            event.accept(itemMain.CHOCOLATE.get());
+            event.accept(itemMain.CUBESUGAR.get());
+            event.accept(itemMain.CULITH.get());
+            event.accept(itemMain.STRABERRYJUICE.get());
+            event.accept(itemMain.BUBLETEA.get());
+            event.accept(itemMain.PIZZACOUNT.get());
+            event.accept(itemMain.COOKINGBOOK.get());
         }
         if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
             event.accept(BlockMod.COOKING_TABLE_BLOCK.get());
             event.accept(BlockMod.FRITEUSE_BLOCK.get());
+            event.accept(BlockMod.KNIFETABLE_BLOCK.get());
         }
         if (event.getTabKey() == CreativeModeTabs.NATURAL_BLOCKS) {
             event.accept(BlockMod.OMAN_BLOCK_ORE.get());
